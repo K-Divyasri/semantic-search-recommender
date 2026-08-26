@@ -1,0 +1,14 @@
+# Secrets -- NEVER commit a real key.
+.env
+
+# Generated catalog / index files (recreated by generate_data.py).
+*.csv
+*.npz
+
+# Python junk.
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/

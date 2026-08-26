@@ -1,0 +1,16 @@
+# The core needs only numpy (for the vectors and cosine maths). Everything else is
+# OPTIONAL.
+numpy>=1.24
+
+# Sharper semantic meaning via real sentence embeddings (pulls torch -- opt-in):
+# sentence-transformers>=2.2
+
+# The optional LLM "why recommended" explanations:
+litellm>=1.40
+python-dotenv>=1.0
+
+# The web demo:
+streamlit>=1.30
+
+# Tests:
+pytest>=8.0

@@ -1,0 +1,33 @@
+# pyproject.toml describes the project in the modern, standard way. It lets you run
+# the tool as `recsys ...` after `pip install -e .`, and it's where pytest reads its
+# settings.
+
+[project]
+name = "recsys"
+version = "0.1.0"
+description = "Semantic search and recommendations over a movie catalog, with filters, ranking strategies, and an A/B test."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+# Sharper semantic meaning via real sentence embeddings (a download the first time).
+minilm = ["sentence-transformers>=2.2"]
+# The optional LLM "why recommended" explanations.
+real = ["litellm>=1.40", "python-dotenv>=1.0"]
+web = ["streamlit>=1.30"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+# Creates the `recsys` terminal command after an editable install.
+recsys = "recsys.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
