@@ -15,8 +15,7 @@
 # requirements.txt, so a single pip install covers it.
 #
 # WHERE THIS FILE GOES: copy it to ".github/workflows/ci.yml" at the ROOT of your repo.
-# Here the repo root is the whole project folder (21-semantic-search-recommender), so the
-# real code sits one level down in build_from_scratch/. GitHub only runs workflow files
+# The real code sits at the repo root too. GitHub only runs workflow files
 # that live under .github/workflows/.
 
 # The name shown in the repo's "Actions" tab.
@@ -48,11 +47,11 @@ jobs:
           python-version: "3.12"
           # Cache pip downloads between runs so installs are faster.
           cache: pip
-          # Tell the cache where the dependency list lives (it's not at the repo root).
-          cache-dependency-path: build_from_scratch/requirements.txt
+          # Tell the cache where the dependency list lives (the repo root).
+          cache-dependency-path: requirements.txt
 
-      # Step 3: install the project's dependencies. requirements.txt lives inside
-      # build_from_scratch/, so we point pip at it explicitly. "--upgrade pip" just
+      # Step 3: install the project's dependencies. requirements.txt lives at
+      # the repo root, so pip finds it directly. "--upgrade pip" just
       # makes sure pip itself is current first. This installs numpy (the one real
       # core dependency the tests need) plus pytest. litellm and streamlit are listed
       # in there too and install fine -- they're only actually USED with the optional
@@ -61,14 +60,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r build_from_scratch/requirements.txt
+          pip install -r requirements.txt
 
-      # Step 4: run the tests. We "cd" into build_from_scratch first with
-      # working-directory, because that's where pyproject.toml and the tests/ folder
-      # are. pyproject.toml already tells pytest where the tests live
+      # Step 4: run the tests. We run from the repo root, because that's where
+      # pyproject.toml and the tests/ folder are. pyproject.toml already tells pytest
+      # where the tests live
       # (testpaths = ["tests"]) and how to find the package (pythonpath = ["."]), so a
-      # bare "pytest" from that folder finds and runs the whole suite -- all 23 tests,
+      # bare "pytest" from there finds and runs the whole suite -- all 23 tests,
       # offline, no API key, no secrets. The job passes only if every one of them passes.
       - name: Run tests
-        working-directory: build_from_scratch
         run: pytest

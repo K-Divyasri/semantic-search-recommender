@@ -5,7 +5,7 @@ haven't actually verified by running the command — "should work" isn't the sam
 
 ## Runs locally
 
-- [ ] Fresh virtual environment, dependencies installed cleanly (from `build_from_scratch/`):
+- [ ] Fresh virtual environment, dependencies installed cleanly (from the repo root):
       `python -m venv .venv ; .\.venv\Scripts\Activate.ps1` then `pip install -r requirements.txt`
 - [ ] Semantic search works offline, no API key:
       `python -m recsys search "space adventure with aliens"` prints ranked results.
@@ -21,14 +21,14 @@ haven't actually verified by running the command — "should work" isn't the sam
 
 ## Tests pass
 
-- [ ] `pytest` run from `build_from_scratch/` is all green (23 tests, all offline, no key).
+- [ ] `pytest` run from the repo root is all green (23 tests, all offline, no key).
 - [ ] You ran it in the fresh venv, not just your everyday one, so you know the deps are complete
       (the one that matters is numpy — it's in `requirements.txt`).
 
 ## README is recruiter-ready
 
 - [ ] A root `README.md` exists and covers: the problem, what the project does, how to run it,
-      and what you learned. (Point deeper detail at `build_from_scratch/README.md`.)
+      and what you learned.
 - [ ] A **screenshot or GIF** is embedded — the search results table and/or the **A/B test tab**
       showing the blended ranker winning NDCG (`docs/search.png`, `docs/abtest.png`, or a short
       GIF). The "blended wins NDCG" shot is the memorable visual; show it.
@@ -37,8 +37,7 @@ haven't actually verified by running the command — "should work" isn't the sam
 
 ## Secrets are clean
 
-- [ ] The root `.gitignore` contains `.env`, `build_from_scratch/.env`, plus `data/*.csv`,
-      `data/*.json`, `data/*.npz`; the `build_from_scratch/.gitignore` contains `.env`, `*.csv`,
+- [ ] The root `.gitignore` contains `.env`, `*.csv`,
       `*.npz`, `.venv/`, `__pycache__/`, `.pytest_cache/`.
 - [ ] `git status` shows `.env` is NOT tracked.
 - [ ] `git ls-files` output contains NO `.env` (only `.env.example`) and NO `.csv` file
@@ -61,12 +60,12 @@ haven't actually verified by running the command — "should work" isn't the sam
 - [ ] The run used NO secrets (the tests are offline) — confirm it passed without any API key
       configured. That's a selling point; mention it in the README.
 - [ ] If it was red, you read the log and fixed the cause (usually a missing dep in
-      `build_from_scratch/requirements.txt` — most likely numpy), then re-ran to green.
+      `requirements.txt` - most likely numpy), then re-ran to green.
 
 ## Live demo
 
 - [ ] Deployed free to Streamlit Community Cloud (main file path
-      `build_from_scratch/web_app.py`) or Hugging Face Spaces.
+      `web_app.py`) or Hugging Face Spaces.
 - [ ] Opening the public URL loads the page fully populated — search, filters, "more like this",
       and the A/B result all work with no committed data and no key.
 - [ ] The heavy `sentence-transformers` extra is left commented out in `requirements.txt` so the
